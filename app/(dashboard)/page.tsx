@@ -4,28 +4,46 @@ import { Infobar } from "@/components/infobar";
 import { useEffect, useState } from "react";
 import InstallPopup from "./_components/pwa-modal";
 
+import { Workbox } from "workbox-window";
+
 export default async function Home() {
   // const initialGames = await getGameCards("mostPlayed");
 
   const [games, setGames] = useState("");
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
 
   useEffect(() => {
+    const handleBeforeInstallPrompt = (e: any) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("/sw.js")
-          .then((registration) => {
-            console.log("Service worker registered: ", registration);
-          })
-          .catch((registrationError) => {
-            console.log(
-              "Service worker registration failed: ",
-              registrationError
-            );
-          });
+      const wb = new Workbox("/sw.js");
+      wb.register();
+    }
+    return () => {
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
+    };
+  }, []);
+
+  const handleInstallClick = () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult: any) => {
+        if (choiceResult.outcome === "accepted") {
+          console.log("User accepted the install prompt");
+        } else {
+          console.log("User dismissed the install prompt");
+        }
+        setDeferredPrompt(null);
       });
     }
-  }, []);
+  };
 
   return (
     <div className=" w-full py-1 pl-10 mb-8 ">
@@ -35,7 +53,14 @@ export default async function Home() {
           // <GameCard key={game.id} {...game} />
         ))} */}
       </div>
-      <InstallPopup />
+      {deferredPrompt && (
+        <button
+          onClick={handleInstallClick}
+          style={{ position: "fixed", bottom: 20, right: 20 }}
+        >
+          Install App
+        </button>
+      )}
     </div>
   );
 }

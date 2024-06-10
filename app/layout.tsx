@@ -10,12 +10,6 @@ export const metadata: Metadata = {
   description: "PWA application with Next 14",
   generator: "Next.js",
   manifest: "/manifest.json",
-  keywords: ["nextjs", "nextjs13", "next13", "pwa", "next-pwa"],
-  authors: [],
-  icons: [
-    { rel: "apple-touch-icon", url: "icons/icon-128x128.png" },
-    { rel: "icon", url: "icons/icon-128x128.png" },
-  ],
 };
 
 export default function RootLayout({
