@@ -5,6 +5,11 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV !== "development", // Remove console.log in production
   },
+  pwa: {
+    dest: "public",
+    register: true,
+    sw: "/sw.js", // service worker file location
+  },
 };
 
 const withPWA = require("next-pwa")({
