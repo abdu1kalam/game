@@ -2,11 +2,10 @@
 
 import { Infobar } from "@/components/infobar";
 import { useEffect, useState } from "react";
-import InstallPopup from "./_components/pwa-modal";
 
 import { Workbox } from "workbox-window";
 
-export default async function Home() {
+export default function Home() {
   // const initialGames = await getGameCards("mostPlayed");
 
   const [games, setGames] = useState("");
