@@ -69,18 +69,18 @@ export default function Home() {
 
   const { setGames, games } = useGameStore();
 
-  const fetchGames = async () => {
-    try {
-      const gamesData = await getGames();
-      setGames(gamesData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchGames = async () => {
+      try {
+        const gamesData = await getGames();
+        setGames(gamesData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchGames();
-  }, [fetchGames]);
+  }, [setGames]);
 
   const handleLikeToggle = (id: number) => {
     setGames(
