@@ -51,19 +51,19 @@ export const GameCards = ({ handleLikeToggle }: Props) => {
                     {game.name}
                   </h1>
 
-                  <p className="text-sm  leading-4 truncate pb-4 text-transparent bg-clip-text bg-gradient-to-r from-slate-300 to-orange-300 ">
+                  <p className="text-base  leading-4 truncate pb-4 text-transparent bg-clip-text bg-gradient-to-r from-slate-300 to-orange-300 ">
                     {game.categories}
                   </p>
                 </div>
                 <Separator className=" text-muted-foreground max-w-[80%] mx-auto" />
                 <div className="flex justify-between items-center  space-x-2 mx-4 mb-4 mt-4">
-                  <p className="text-sm leading-4 truncate pb-4 text-transparent bg-clip-text bg-gradient-to-r from-slate-300 to-orange-300 ">
+                  <p className="text-base leading-4 truncate pb-4 text-transparent bg-clip-text bg-gradient-to-r from-slate-300 to-orange-300 ">
                     {game.description}
                   </p>
                   <Heart
                     onClick={() => handleLikeToggle(game.id)}
                     className={cn(
-                      "h-4 w-4 text-muted-foreground",
+                      "h-6 w- text-muted-foreground cursor-pointer",
                       game.userLiked ? "fill-rose-500" : ""
                     )}
                   />

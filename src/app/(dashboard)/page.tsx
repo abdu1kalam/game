@@ -77,28 +77,9 @@ export default function Home() {
     }
   };
 
-  const [selectedCategory, setSelectedCategory] = useState("All");
-
-  const [filteredGames, setFilteredGames] = useState(games);
-  const handleCategoryChange = (event: any) => {
-    setSelectedCategory(event.target.value);
-  };
-
-  const applyFilter = () => {
-    if (selectedCategory === "All") {
-      setFilteredGames(games);
-    } else {
-      setFilteredGames(
-        games.filter((game) => game.categories === selectedCategory)
-      );
-    }
-  };
-
-  const resetFilter = () => {
-    setSelectedCategory("All");
-    setFilteredGames(games);
+  useEffect(() => {
     fetchGames();
-  };
+  }, []);
 
   const handleLikeToggle = (id: number) => {
     setGames(
@@ -122,12 +103,7 @@ export default function Home() {
       <div className="w-full">
         <Navbar />
 
-        <BrandPage
-          selectedCategory={selectedCategory}
-          onCategoryChange={handleCategoryChange}
-          onApplyFilter={applyFilter}
-          onResetFilter={resetFilter}
-        />
+        <BrandPage />
 
         <GameCards handleLikeToggle={handleLikeToggle} />
 
