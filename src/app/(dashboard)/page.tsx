@@ -68,16 +68,15 @@ export default function Home() {
   const [showInstallModal, setShowInstallModal] = useState<Boolean>(false);
 
   const { setGames, games } = useGameStore();
-  const fetchGames = useCallback(() => {
-    async () => {
-      try {
-        const gamesData = await getGames();
-        setGames(gamesData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  }, []);
+
+  const fetchGames = async () => {
+    try {
+      const gamesData = await getGames();
+      setGames(gamesData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     fetchGames();
