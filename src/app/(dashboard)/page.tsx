@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 
 import dynamic from "next/dynamic";
@@ -68,18 +68,20 @@ export default function Home() {
   const [showInstallModal, setShowInstallModal] = useState<Boolean>(false);
 
   const { setGames, games } = useGameStore();
-  const fetchGames = async () => {
-    try {
-      const gamesData = await getGames();
-      setGames(gamesData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const fetchGames = useCallback(() => {
+    async () => {
+      try {
+        const gamesData = await getGames();
+        setGames(gamesData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     fetchGames();
-  }, []);
+  }, [fetchGames]);
 
   const handleLikeToggle = (id: number) => {
     setGames(
