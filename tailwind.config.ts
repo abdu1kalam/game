@@ -1,13 +1,14 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
+
   prefix: "",
   theme: {
     container: {
@@ -18,7 +19,20 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        "hero-pattern":
+          "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTll9u48cUWYPhTDRPuI-8n-YCkldyIDDuWQ&s')",
+        "footer-texture":
+          "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQydTQpjY6kMFiUKXrZwxJrRcerMbJhTmJToA&s')",
+        "gradient-cream": `linear-gradient(90deg, #FFF9E3 0%, #FFF3CC 50%, #FFEBB5 100%)`,
+        "gradient-to-b": "",
+      },
       colors: {
+        cream: {
+          light: "#FFF9E3",
+          DEFAULT: "#FFF3CC",
+          dark: "#FFEBB5",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -75,6 +89,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;

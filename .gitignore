@@ -13,19 +13,18 @@
 /.next/
 /out/
 
-# all other ignore list
-sw.*
-workbox-*
-swe-worker-*
-
-
-
 # production
 /build
 
 # misc
 .DS_Store
 *.pem
+
+/public/icons/workbox-*.js
+/public/icons/workbox-*.js.map
+/public/icons/sw.js
+/public/icons/sw.js.map
+
 
 # debug
 npm-debug.log*
